@@ -1,17 +1,24 @@
 import React from 'react';
 import {imgurContext, ImgurContext, ImgurState} from './ImgurContext';
 import { getImages } from './ImgurServices';
-import { getImagesRequest, getImagesSuccess } from './ImgurActions';
+import { getImagesRequest, getImagesSuccess, setToken } from './ImgurActions';
 
 export const useImgur = () : [ImgurState, () => void] => {
       const {state, dispatch} = React.useContext<ImgurContext>(imgurContext)
       return [
             state,
             () => {
-                  dispatch(getImagesRequest())
-                  getImages().then(response => {
-                        dispatch(getImagesSuccess(response.data))
-                  })
+                  if(state.token) {
+                        dispatch(getImagesRequest())
+                        getImages(state.token).then(response => {
+                              dispatch(getImagesSuccess(response))
+                        })
+                  }
             }
       ]
+}
+
+export const useSetToken = () : (token: string) => void => {
+      const {dispatch} = React.useContext<ImgurContext>(imgurContext)
+      return (token) => dispatch(setToken(token))
 }
