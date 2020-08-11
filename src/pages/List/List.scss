@@ -1,0 +1,16 @@
+.challenge-card {
+      &-list {
+            background: #26547C 0% 0% no-repeat padding-box;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 40px;
+            align-items: center;
+            margin-bottom: 40px;
+            box-sizing: border-box;
+            border-radius: 25px;
+      }
+      &-wrapper {
+            padding: 100px 20px;
+      }
+}
