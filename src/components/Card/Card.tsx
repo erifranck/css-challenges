@@ -1,10 +1,13 @@
 import React from 'react';
-import './Card.scss';
 import { classNames } from '../../utils/classNames';
+import './Card.scss';
 
 interface Props {
       imgUrl?: string;
       count?: string;
+      timeLimit: number;
+      level: number;
+      isSmall?: boolean;
       flip: boolean;
       onStart: () => void
       onFinish: () => void
@@ -14,14 +17,18 @@ export const Card: React.FC<Props> = (props) => {
             'card-flip': true,
             flipped: props.flip,
       })
+      const containerClasses = classNames({
+            'card-container': true,
+            big: !!props.isSmall,
+      })
       return (
-            <div className="card-container">
+            <div className={containerClasses}>
                   <div className={flipClasses}>
                         <div className="card-front">
                               <div className="card-body">
                                     <div>
-                                          <h1>NIVEL 1</h1>
-                                          <p>30 minutos para completar el reto</p>
+                                          <h1>NIVEL {props.level}</h1>
+                                          <p>{props.timeLimit} minutos para completar el reto</p>
                                     </div>
                               </div>
                               <div className="card-footer">

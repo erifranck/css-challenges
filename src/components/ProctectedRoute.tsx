@@ -6,16 +6,33 @@ import { ImgurState } from '../context/imgur/ImgurContext';
 
 interface Props extends RouteProps {
       validator: (imgurState: ImgurState) => boolean;
+      layout: React.ComponentType<any>,
+      component: React.ComponentType<any>,
       redirectionPath: string;
 }
-export const ProtectedRoute: React.FC<Props> = (props) => {
+export const ProtectedRoute: React.FC<Props> = ({
+            layout: Layout,
+            component: Component,
+            redirectionPath,
+            validator,
+            ...res
+      }) => {
       const [state] = useImgur();
-      if (props.validator(state)) {
+      if (validator(state)) {
             return (
-                  <Redirect to={props.redirectionPath} />
+                  <Redirect to={redirectionPath} />
             )
       }
+      console.log(res.exact)
       return (
-            <Route {...props}/>
+            <Route {...res} render={
+                  (props) => {
+                        return (
+                              <Layout>
+                                    <Component {...props} />
+                              </Layout>
+                        )
+                  }
+            }/>
       )
 }
