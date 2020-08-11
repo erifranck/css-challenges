@@ -7,8 +7,9 @@ import { ProtectedRoute } from '../../components/ProctectedRoute';
 import { Game } from '../../pages/Game/Game';
 import { AppLayout } from '../../components/AppLayout/AppLayout';
 import { ChallengeList } from '../../pages/List/List';
-import './App.css';
 import { MenuSelector } from '../../pages/MenuSelector/MenuSelector';
+import { Score } from '../../pages/Score/Score';
+import './App.css';
 
 interface Props {
   message: string;
@@ -39,6 +40,13 @@ const App: React.FC<Props> = (props) => {
           layout={(props) => <>{props.children}</>}
           path="/menu"
           component={MenuSelector}
+        />
+        <ProtectedRoute
+          validator={(imgurState) => !imgurState.token }
+          redirectionPath="/score"
+          layout={(props) => <>{props.children}</>}
+          path="/score"
+          component={Score}
         />
         <Switch>
           <ProtectedRoute

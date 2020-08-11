@@ -1,0 +1,25 @@
+.score {
+      &-wrapper {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            background-color: #FCD166;
+            overflow: hidden;
+      }
+      &-circle {
+            width: 100vw;
+            height: 100vw;
+            border-radius: 100%;
+            position: absolute;
+            top: -50vw;
+            background-color: #EF476F;
+      }
+      &-value {
+            position: relative;
+            display: block;
+            color: #FCD166;
+            font-size: 4rem;
+            text-align: center;
+            top: 100px;
+      }
+}
