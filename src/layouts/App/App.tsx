@@ -1,11 +1,14 @@
 import React from 'react';
 import {ImgurProvider} from '../../context/imgur/ImgurContext'
-import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import { Login } from '../../pages/Login/Login';
 import { LoginCallback } from '../../pages/LoginCallback';
 import { ProtectedRoute } from '../../components/ProctectedRoute';
 import { Game } from '../../pages/Game/Game';
+import { AppLayout } from '../../components/AppLayout/AppLayout';
+import { ChallengeList } from '../../pages/List/List';
+import './App.css';
+import { MenuSelector } from '../../pages/MenuSelector/MenuSelector';
 
 interface Props {
   message: string;
@@ -15,21 +18,38 @@ const App: React.FC<Props> = (props) => {
   return (
     <ImgurProvider>
       <BrowserRouter>
-        <ProtectedRoute
-          validator={(imgurState) => !!imgurState.token }
-          redirectionPath="/game"
-          path="/"
-          exact
-          component={Game}
-        />
         <Route path="/login" exact component={LoginCallback} />
         <ProtectedRoute
           validator={(imgurState) => !imgurState.token }
-          redirectionPath="/"
+          redirectionPath="/login"
+          layout={AppLayout}
           path="/game"
-          exact
           component={Game}
         />
+        <ProtectedRoute
+          validator={(imgurState) => !imgurState.token }
+          redirectionPath="/login"
+          layout={AppLayout}
+          path="/list"
+          component={ChallengeList}
+        />
+        <ProtectedRoute
+          validator={(imgurState) => !imgurState.token }
+          redirectionPath="/login"
+          layout={(props) => <>{props.children}</>}
+          path="/menu"
+          component={MenuSelector}
+        />
+        <Switch>
+          <ProtectedRoute
+            validator={(imgurState) => !!imgurState.token }
+            redirectionPath="/game"
+            path="/"
+            exact
+            layout={AppLayout}
+            component={Login}
+          />
+        </Switch>
       </BrowserRouter>
     </ImgurProvider>
   );
