@@ -10,11 +10,14 @@ function countFormatter(distance: number) {
       return `${minutes}:${seconds}:${milliseconds}`;
 }
 
-export const useCounter = (delay = 15): [string, () => void] => {
+export interface CounterFunction {
+      stopCounter: () => void
+};
+export const useCounter = (): [string, (delay?: number) => CounterFunction] => {
       const [state, setstate] = useState('00:00:000')
       return [
             state,
-            () => {
+            (delay = 15) => {
                   const countDown = counter(delay);
                   const interval = setInterval(() => {
                         const distance = countDown - new Date().getTime();
@@ -23,6 +26,11 @@ export const useCounter = (delay = 15): [string, () => void] => {
                               clearInterval(interval);
                         }
                   })
+                  return {
+                        stopCounter: () => {
+                              clearInterval(interval)
+                        }
+                  }
             }
       ]      
 }
