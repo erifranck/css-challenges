@@ -1,0 +1,14 @@
+.challenge-list {
+      &-wrapper {
+            margin-top: 60px;
+            box-sizing: border-box;
+      }
+      &-content {
+            background-color: #26547C;
+            border-radius: 23px;
+            padding: 30px;
+            margin: 40px 20px;
+            display: flex;
+            justify-content: space-around;
+      }
+}

@@ -1,0 +1,22 @@
+.menu-selector {
+      &-wrapper {
+            width: 100vw;
+            height: 100vh;
+            background-color: #EF476F;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+      }
+      &-list {
+            list-style: none;
+            margin-right: 30px;
+      }
+      &-item {
+            font-size: 72px;
+            margin-bottom: 70px;
+            a {
+                  text-decoration: none;
+                  color: #FCD166;
+            }
+      }
+}
