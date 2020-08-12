@@ -1,5 +1,5 @@
 import { INITIAL_STATE, ImgurState, ImgurAction } from './ImgurContext';
-import { GET_IMAGES, GET_IMAGES_SUCCESS, SET_TOKEN } from './ImgurActions';
+import { GET_IMAGES, GET_IMAGES_SUCCESS, SET_TOKEN, LOGOUT, SET_SCORE } from './ImgurActions';
 import { Persistor } from '../../utils/persistor';
 
 export const imgurPersistor = Persistor<ImgurState>('imgur');
@@ -21,6 +21,16 @@ export function imgurReducer(state = INITIAL_STATE, action: ImgurAction) : Imgur
                         return {
                               ...state,
                               token: action.token
+                        };
+                  case SET_SCORE:
+                        return {
+                              ...state,
+                              score: state.score + ( action.score || 0 ),
+                        };
+                  case LOGOUT:
+                        return {
+                              fetch: false,
+                              score: 0,
                         };
                   default: 
                         return state;

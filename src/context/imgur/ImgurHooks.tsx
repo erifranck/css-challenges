@@ -1,7 +1,7 @@
 import React from 'react';
 import {imgurContext, ImgurContext, ImgurState} from './ImgurContext';
 import { getImages } from './ImgurServices';
-import { getImagesRequest, getImagesSuccess, setToken } from './ImgurActions';
+import { getImagesRequest, getImagesSuccess, setToken, setScore } from './ImgurActions';
 
 export const useImgur = () : [ImgurState, () => void] => {
       const {state, dispatch} = React.useContext<ImgurContext>(imgurContext)
@@ -21,4 +21,9 @@ export const useImgur = () : [ImgurState, () => void] => {
 export const useSetToken = () : (token: string) => void => {
       const {dispatch} = React.useContext<ImgurContext>(imgurContext)
       return (token) => dispatch(setToken(token))
+}
+
+export const useSetScore = () : (score: number) => void => {
+      const {dispatch} = React.useContext<ImgurContext>(imgurContext)
+      return (score) => dispatch(setScore(score))
 }

@@ -6,6 +6,7 @@ import { imgurReducer, imgurPersistor } from './ImgurReducer';
 
 export interface ImgurState {
       fetch: boolean;
+      score: number;
       data?: ImgurData[];
       token?: string;
 }
@@ -14,12 +15,14 @@ export type ImgurAction = {
       type: string;
       data?: ImgurData[];
       token?: string;
+      score?: number;
 }
 
 export type ImgurContext = ManageContext<ImgurState, ImgurAction>
 
 export const INITIAL_STATE = imgurPersistor.get() || {
       fetch: false,
+      score: 0,
 }
 
 export const imgurContext = React.createContext<ImgurContext>({
