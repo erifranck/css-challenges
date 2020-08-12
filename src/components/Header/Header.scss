@@ -1,0 +1,15 @@
+.header {
+      &-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            justify-items: center;
+      }
+      &-menu-item {
+            width: 50px;
+            height: 50px;
+            hr {
+                  border: 2px solid #26547C;
+                  max-width: 100%;
+            }
+      }
+}

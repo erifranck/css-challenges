@@ -1,10 +1,12 @@
 import React from 'react';
-import './Card.scss';
 import { classNames } from '../../utils/classNames';
+import './Card.scss';
 
 interface Props {
       imgUrl?: string;
       count?: string;
+      level: number;
+      time: number;
       flip: boolean;
       onStart: () => void
       onFinish: () => void
@@ -20,8 +22,8 @@ export const Card: React.FC<Props> = (props) => {
                         <div className="card-front">
                               <div className="card-body">
                                     <div>
-                                          <h1>NIVEL 1</h1>
-                                          <p>30 minutos para completar el reto</p>
+                                          <h1>NIVEL {props.level}</h1>
+                                          <p>{props.time} minutos para completar el reto</p>
                                     </div>
                               </div>
                               <div className="card-footer">

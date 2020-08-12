@@ -6,9 +6,11 @@ import { ImgurState } from '../context/imgur/ImgurContext';
 
 interface Props extends RouteProps {
       validator: (imgurState: ImgurState) => boolean;
+      layout: React.ComponentType<any>,
+      component: React.ComponentType<any>,
       redirectionPath: string;
 }
-export const ProtectedRoute: React.FC<Props> = (props) => {
+export const ProtectedRoute: React.FC<Props> = ({ layout: Layout, component: Component,...props }) => {
       const [state] = useImgur();
       if (props.validator(state)) {
             return (
@@ -16,6 +18,10 @@ export const ProtectedRoute: React.FC<Props> = (props) => {
             )
       }
       return (
-            <Route {...props}/>
+            <Route {...props} render={(componentProps) => (
+                  <Layout>
+                        <Component {...componentProps}/>
+                  </Layout>
+            )}/>
       )
 }
